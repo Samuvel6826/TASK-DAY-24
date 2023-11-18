@@ -1,11 +1,11 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 function Sidebar() {
   return <>
     <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 {/* <!-- Sidebar - Brand --> */}
-<a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+<a className="sidebar-brand d-flex align-items-center justify-content-center" href="javascript(void)">
     <div className="sidebar-brand-icon rotate-n-15">
         <i className="fas fa-laugh-wink"></i>
     </div>
@@ -17,9 +17,9 @@ function Sidebar() {
 
 {/* <!-- Nav Item - Dashboard --> */}
 <li className="nav-item active">
-    <a className="nav-link" href="index.html">
+    <Link to = "/dashboard" className='nav-link'>
         <i className="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
+        <span>Dashboard</span></Link>
 </li>
 
 {/* <!-- Divider --> */}
@@ -32,21 +32,11 @@ function Sidebar() {
 
 {/* <!-- Nav Item - Pages Collapse Menu --> */}
 <li className="nav-item">
-    <a className="nav-link collapsed" href="javascript(void)" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
+    <Link to = "/create-user" className='nav-link'>
         <i className="fas fa-fw fa-cog"></i>
-        <span>Components</span>
-    </a>
+        <span>Create User</span></Link>
 </li>
 
-{/* <!-- Nav Item - Utilities Collapse Menu --> */}
-<li className="nav-item">
-    <a className="nav-link collapsed" href="javascript(void)" data-toggle="collapse" data-target="#collapseUtilities"
-        aria-expanded="true" aria-controls="collapseUtilities">
-        <i className="fas fa-fw fa-wrench"></i>
-        <span>Utilities</span>
-    </a>
-</li>
 </ul>
   </>
 }
