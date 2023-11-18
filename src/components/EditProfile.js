@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,14 +7,15 @@ function EditProfile({users,setUsers}) {
 
   let params = useParams()
 
-  let [pic] = useState(users[params.id].pic)
-  let [name,setName] = useState(users[params.id].name)
-  let [email,setEmail] = useState(users[params.id].email)
-  let [mobile,setMobile] = useState(users[params.id].mobile)
-  let [city,setCity] = useState(users[params.id].city)
-  let [fullAddress,setFullAddress] = useState(users[params.id].fullAddress)
-  let [pincode,setPincode] = useState(users[params.id].pincode)
-  let [batch,setBatch] = useState(users[params.id].batch)
+  let [pic,setPic] = useState()
+  let [name,setName] = useState()
+  let [email,setEmail] = useState()
+  let [mobile,setMobile] = useState()
+  let [city,setCity] = useState()
+  let [fullAddress,setFullAddress] = useState()
+  let [pincode,setPincode] = useState()
+  let [batch,setBatch] = useState()
+
   let navigate = useNavigate()
 
   let handleSave = ()=>{
@@ -23,6 +24,25 @@ function EditProfile({users,setUsers}) {
     setUsers(newArray)
     navigate(`/profile/${params.id}`)
   }
+
+  useEffect(()=> {
+    if(params.id < users.length)
+    {
+      setPic(users[params.id].pic)
+      setName(users[params.id].name)
+      setEmail(users[params.id].email)
+      setMobile(users[params.id].mobile)
+      setCity(users[params.id].city)
+      setFullAddress(users[params.id].fullAddress)
+      setPincode(users[params.id].pincode)
+      setBatch(users[params.id].batch)
+    }
+    else
+    {
+      alert("Invalid User Id")
+      navigate("/profile")
+    }
+  },[navigate,params.id,users])
 
   return <div className='container'>
      <div className="d-sm-flex align-items-center justify-content-between mb-4">

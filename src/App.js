@@ -4,8 +4,8 @@ import CreateUser from "./components/CreateUser";
 import EditUser from "./components/EditUser";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
-import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom';
-import { useState} from "react";
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import { useState } from "react";
 
 function App() {
   let [users,setUsers] = useState([
@@ -72,7 +72,6 @@ function App() {
           <Route path='/edit-user/:id' element={<EditUser users={users} setUsers={setUsers}/>}/>
           <Route path='/profile/:id' element={<Profile users={users} setUsers={setUsers}/>}/>
           <Route path='/edit-profile/:id' element={<EditProfile users={users} setUsers={setUsers}/>}/>
-          <Route path="*" element={<Navigate to = "/dashboard"/>}></Route>
        </Routes>
       </div>
       </div>

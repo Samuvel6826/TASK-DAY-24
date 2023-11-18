@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,23 +7,40 @@ function EditUser({users,setUsers}) {
 
   let params = useParams()
 
-  let [name,setName] = useState(users[params.id].name)
-  let [email,setEmail] = useState(users[params.id].email)
-  let [mobile,setMobile] = useState(users[params.id].mobile)
-  let [city,setCity] = useState(users[params.id].city)
-  let [batch,setBatch] = useState(users[params.id].batch)
+  let [name,setName] = useState()
+  let [email,setEmail] = useState()
+  let [mobile,setMobile] = useState()
+  let [address,setAddress] = useState()
+  let [batch,setBatch] = useState()
+  
   let navigate = useNavigate()
 
   let handleSave = ()=>{
     let newArray = [...users]
-    newArray.splice(params.id,1,{name,email,mobile,city,batch})
+    newArray.splice(params.id,1,{name,email,mobile,address,batch})
     setUsers(newArray)
     navigate('/dashboard')
   }
 
+useEffect(()=> {
+  if(params.id < users.length)
+  {
+    setName(users[params.id].name)
+    setEmail(users[params.id].email)
+    setMobile(users[params.id].mobile)
+    setAddress(users[params.id].address)
+    setBatch(users[params.id].batch)
+  }
+  else
+  {
+    alert("Invalid User Id")
+    navigate("/dashboard")
+  }
+},[navigate,params.id,users])
+
   return <div className='container'>
      <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h1 mb-0 text-gray-800">Edit User</h1>
+                <h1 className="h3 mb-0 text-gray-800">Edit User</h1>
             </div>
     <Form>
     <Form.Group className="mb-3">
@@ -43,7 +60,7 @@ function EditUser({users,setUsers}) {
 
       <Form.Group className="mb-3">
         <Form.Label>Address</Form.Label>
-        <Form.Control type="text" placeholder="Enter City Name" value={city} onChange={(e)=>setCity(e.target.value)}/>
+        <Form.Control type="text" placeholder="Enter Address" value={address} onChange={(e)=>setAddress(e.target.value)}/>
       </Form.Group>
 
       <Form.Group className="mb-3">
